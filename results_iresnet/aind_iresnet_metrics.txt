@@ -1,0 +1,6 @@
+aIND Decomposition Metrics (IResNet)
+============================================================
+Mutual Information I(Φᴵ; Φᴿ): 1.414633
+Residual Energy ||Φ - Φᴵ||²: 0.145492
+Mapping Error ||Ψ⁺ - F(Φᴵ)||²: 0.168373
+Total Loss: 1.728498

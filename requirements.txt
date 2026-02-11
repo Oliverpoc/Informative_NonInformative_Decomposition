@@ -1,0 +1,12 @@
+numpy
+matplotlib
+scikit-learn
+dit
+jpype1
+torch
+torchvision
+torchaudio
+scipy
+pandas
+seaborn
+plotly
