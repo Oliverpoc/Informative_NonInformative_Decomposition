@@ -1,6 +1,0 @@
-aIND Decomposition Metrics
-============================================================
-Mutual Information I(Φᴵ; Φᴿ): 0.956566
-Residual Energy ||Φ - Φᴵ||²: 0.009240
-Mapping Error ||Ψ⁺ - F(Φᴵ)||²: 0.000136
-Total Loss: 0.965942
