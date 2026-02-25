@@ -365,29 +365,31 @@ def visualize_decomposition(
         Phi_R = Phi_R.reshape(nx, ny)
     
     # Figure 1: Field comparison (2 x 3 layout)
-    plt.figure(figsize=(14, 8))
+    fig, axes = plt.subplots(2, 3, figsize=(14, 8))
     titles = [
         "Φ (Source Field)\nΦ = f + g",
-        "Ψ⁺ (Target Field)\nΨ⁺ = 0.5f² - 0.2f + ε",
-        "Φᴵ (Reconstructed Informative)",
-        "Φᴿ (Reconstructed Residual)\nΦᴿ = Φ - Φᴵ",
         "f (True Informative)",
+        "Φᴵ (Reconstructed Informative)",
+        "Ψ⁺ (Target Field)\nΨ⁺ = 0.5f² - 0.2f + ε",
         "g (True Residual)",
+        "Φᴿ (Reconstructed Residual)\nΦᴿ = Φ - Φᴵ",
     ]
-    fields = [Phi, Psi_plus, Phi_I, Phi_R, f_true, g_true]
-    
-    for i, (field, title) in enumerate(zip(fields, titles), 1):
-        plt.subplot(2, 3, i)
-        im = plt.imshow(field, origin="lower", cmap='RdBu',    extent=[0, 1, 0, 2],    aspect=0.5)
-        plt.title(title, fontsize=10)
-        #plt.colorbar(im, fraction=0.046)
-        plt.xlabel("x")
-        plt.ylabel("y")
-    
-    plt.tight_layout()
+    fields = [Phi, f_true, Phi_I, Psi_plus, g_true, Phi_R]
+
+    vabs = max(np.abs(f).max() for f in fields)
+
+    for ax, field, title in zip(axes.flat, fields, titles):
+        im = ax.imshow(field, origin="lower", cmap="RdBu", extent=[0, 1, 0, 2], aspect=0.5,
+                       vmin=-vabs, vmax=vabs)
+        ax.set_title(title, fontsize=10)
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+
+    fig.colorbar(im, ax=axes.ravel().tolist(), shrink=0.6, label="Field value")
+    fig.tight_layout()
     fields_path = os.path.join(output_dir, f"{prefix}_fields.png")
-    plt.savefig(fields_path, dpi=300, bbox_inches="tight")
-    plt.close()
+    fig.savefig(fields_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
     print(f"Field visualization saved to: {fields_path}")
     
     # Figure 2: Scatter plots

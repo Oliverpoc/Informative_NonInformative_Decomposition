@@ -1,0 +1,8 @@
+aIND Decomposition Metrics  (Toy v2: Phi = c^2+cf+cg+fg)
+============================================================
+I(Phi_I ; Phi_R)                   : 0.471899
+Residual energy ||Phi - Phi_I||^2  : 0.082791
+MI(Phi_I , Psi+)                   : 3.874463
+MI(Phi_R , Psi+)                   : 0.369286
+GT error ||Phi_I - Phi_I_true||^2  : 0.222232
+Total loss                         : 0.554690
