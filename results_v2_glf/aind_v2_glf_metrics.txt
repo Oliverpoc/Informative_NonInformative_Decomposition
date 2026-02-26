@@ -1,10 +1,10 @@
 aIND Metrics  (Gaussian Latent Flow, Toy v2)
 Flows: 32 terms | g_theta: 3 x 64
-lambda_pred=1.0 | lambda_ind=1.0 | lambda_min=0.0
+lambda_pred=1.0 | lambda_ind=5 | lambda_min=0.0
 ============================================================
-I(Phi_I ; Phi_R)                   : 0.469874
-Residual energy                    : 0.339215
-MI(Phi_I, Psi+)                    : 7.728300
-MI(Phi_R, Psi+)                    : 0.501210
-GT error ||Phi_I-Phi_I_true||      : 0.304811
-Total loss                         : 0.809089
+I(Phi_I ; Phi_R)                   : 1.610702
+Residual energy                    : 0.933705
+MI(Phi_I, Psi+)                    : 7.715569
+MI(Phi_R, Psi+)                    : 1.737676
+GT error ||Phi_I-Phi_I_true||      : 0.926374
+Total loss                         : 2.544407

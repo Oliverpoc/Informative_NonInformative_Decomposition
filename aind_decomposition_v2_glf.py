@@ -20,13 +20,50 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-from toy_settings_v2 import (
+# from toy_settings_v2 import (
+#     phi_func,
+#     phi_informative_true,
+#     phi_residual_true,
+#     psi_plus_func,
+# )
+from toy_settings import (
     phi_func,
-    phi_informative_true,
-    phi_residual_true,
     psi_plus_func,
+    f_func,
+    g_func,
+    F_analytical,
 )
-from aind_decomposition_v2 import evaluate_decomposition
+
+from sklearn.feature_selection import mutual_info_regression
+from sklearn.metrics import mean_squared_error
+
+
+def evaluate_decomposition(Phi, Psi_plus, Phi_I, Phi_R, Phi_I_true=None):
+    """
+    Evaluate aIND decompositionF
+    -------
+    mutual_information : I(Phi_I; Phi_R) via sklearn  (lower = more independent)
+    residual_energy    : MSE(Phi, Phi_I)              (lower = smaller residual)
+    mi_phiI_psi        : MI(Phi_I, Psi+)              (higher = informative)
+    mi_phiR_psi        : MI(Phi_R, Psi+)              (lower  = non-informative)
+    gt_error           : MSE(Phi_I, Phi_I_true)       (lower = closer to ground truth)
+    """
+    metrics = {}
+    metrics["mutual_information"] = mutual_info_regression(
+        Phi_R.reshape(-1, 1), Phi_I, random_state=42
+    )[0]
+    metrics["residual_energy"] = mean_squared_error(Phi, Phi_I)
+    metrics["mi_phiI_psi"] = mutual_info_regression(
+        Phi_I.reshape(-1, 1), Psi_plus, random_state=42
+    )[0]
+    metrics["mi_phiR_psi"] = mutual_info_regression(
+        Phi_R.reshape(-1, 1), Psi_plus, random_state=42
+    )[0]
+    metrics["gt_error"] = (
+        mean_squared_error(Phi_I_true, Phi_I) if Phi_I_true is not None else float("nan")
+    )
+    metrics["total_loss"] = metrics["mutual_information"] + metrics["residual_energy"]
+    return metrics
 
 
 # ---------------------------------------------------------------------------
@@ -611,7 +648,7 @@ def visualize_decomposition(
     output_dir: str = "results_v2_glf",
     prefix:     str = "aind_v2_glf",
 ):
-    """2 x 3 field comparison with shared colorbar, plus scatter diagnostics."""
+    """2 x 3 field comparison with individual colorbars per subplot, plus scatter diagnostics."""
     os.makedirs(output_dir, exist_ok=True)
 
     if Phi_I.ndim == 1:
@@ -629,17 +666,15 @@ def visualize_decomposition(
         "\u03a6\u1d3f (Reconstructed Residual)\n\u03a6\u1d3f = \u03a6 \u2212 \u03a6\u1d35",
     ]
     fields = [Phi, Phi_I_true, Phi_I, Psi_plus, Phi_R_true, Phi_R]
-    vabs   = max(np.abs(f).max() for f in fields)
 
     for ax, field, title in zip(axes.flat, fields, titles):
         im = ax.imshow(field, origin="lower", cmap="RdBu",
-                       extent=[0, 1, 0, 2], aspect=0.5,
-                       vmin=-vabs, vmax=vabs)
+                       extent=[0, 1, 0, 2], aspect=0.5)
         ax.set_title(title, fontsize=10)
         ax.set_xlabel("x")
         ax.set_ylabel("y")
+        plt.colorbar(im, ax=ax, fraction=0.046)
 
-    fig.colorbar(im, ax=axes.ravel().tolist(), shrink=0.6, label="Field value")
     fig.tight_layout()
     fields_path = os.path.join(output_dir, f"{prefix}_fields.png")
     fig.savefig(fields_path, dpi=300, bbox_inches="tight")
@@ -705,11 +740,11 @@ def main(
     n_layers:       int   = 3,
     use_gating:     bool  = False,
     # Training
-    num_epochs:     int   = 2000,
-    lr:             float = 1e-3,
+    num_epochs:     int   = 1000,
+    lr:             float = 5e-3,
     # Loss weights
     lambda_pred:    float = 1.0,
-    lambda_ind:     float = 1.0,
+    lambda_ind:     float = 5.0,
     lambda_min:     float = 0.0,
     # HSIC
     hsic_sigma:     float = 1.0,
@@ -730,8 +765,10 @@ def main(
 
     Phi        = phi_func(X, Y, t)
     Psi_plus   = psi_plus_func(X, Y, t, deltaT=0.0, noise_std=1e-8)
-    Phi_I_true = phi_informative_true(X, Y, t)
-    Phi_R_true = phi_residual_true(X, Y, t)
+    # Phi_I_true = phi_informative_true(X, Y, t)
+    # Phi_R_true = phi_residual_true(X, Y, t)
+    Phi_I_true = f_func(X, Y, t)
+    Phi_R_true = g_func(X, Y, t)
 
     if verbose:
         print("=" * 60)
@@ -830,9 +867,9 @@ if __name__ == "__main__":
         n_layers=3,
         use_gating=False,
         num_epochs=2000,
-        lr=1e-3,
+        lr=7e-3,
         lambda_pred=1.0,
-        lambda_ind=1.0,
+        lambda_ind=5,
         lambda_min=0.0,
         adaptive_sigma=True,
         hsic_max_n=2000,
