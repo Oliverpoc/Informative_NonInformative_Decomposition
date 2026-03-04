@@ -1,0 +1,9 @@
+aIND Metrics  (JCF2: bivariate NLL + HSIC)
+n_layers=6 | hidden_dim=32 | epochs=2000
+rho=+0.854061  A=+0.958048  I~=1.249644 nats
+============================================================
+I(Phi_I ; Phi_R)                   : 1.057469
+Residual energy                    : 0.001902
+MI(Phi_I, Psi+)                    : 2.056674
+MI(Phi_R, Psi+)                    : 0.846615
+GT error ||Phi_I-Phi_I_true||      : 0.014258

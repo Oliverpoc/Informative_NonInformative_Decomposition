@@ -1,0 +1,10 @@
+aIND Metrics  (Joint Gaussian Flow)
+Toy: tanh(2.0*u) + 0.5*v  |  n_terms=32  |  epochs=1000
+Learned rho = -0.217012
+I(Phi;Psi) ~= 0.024120 nats
+============================================================
+I(Phi_I ; Phi_R)                   : 1.815259
+Residual energy                    : 0.566785
+MI(Phi_I, Psi+)                    : 7.752469
+MI(Phi_R, Psi+)                    : 1.812967
+GT error ||Phi_I-Phi_I_true||      : 0.564278

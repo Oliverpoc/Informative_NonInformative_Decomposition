@@ -1,0 +1,33 @@
+JCF2 Hyperparameter Search
+======================================================================
+
+Config 1: {'n_layers': 4, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 1.0, 'gamma': 1.0}
+  gt_error=0.017848  I(Phi_I;Phi_R)=1.128209  A=-0.0719  rho=-0.0797
+
+Config 2: {'n_layers': 4, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.005, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}
+  gt_error=0.013572  I(Phi_I;Phi_R)=1.040521  A=-0.1389  rho=-0.1408
+
+Config 3: {'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 1.0, 'gamma': 1.0}
+  gt_error=0.009018  I(Phi_I;Phi_R)=1.159402  A=-0.0550  rho=-0.0552
+
+Config 4: {'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}
+  gt_error=0.008838  I(Phi_I;Phi_R)=1.155344  A=-0.0426  rho=-0.0461
+
+Config 5: {'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 2000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}
+  gt_error=0.008515  I(Phi_I;Phi_R)=1.123029  A=-0.0956  rho=-0.0962
+
+Config 6: {'n_layers': 6, 'hidden_dim': 64, 'num_epochs': 1000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}
+  gt_error=0.009021  I(Phi_I;Phi_R)=1.285407  A=-0.0649  rho=-0.0570
+
+Config 7: {'n_layers': 8, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}
+  gt_error=0.009600  I(Phi_I;Phi_R)=1.026696  A=-0.0439  rho=-0.0500
+
+Config 8: {'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 1000, 'lr': 0.001, 'lambda_white': 2.0, 'lambda_hsic': 10.0, 'gamma': 2.0}
+  gt_error=0.011813  I(Phi_I;Phi_R)=1.121519  A=-0.0272  rho=-0.0250
+
+Config 9: {'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 1500, 'lr': 0.005, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 0.5}
+  gt_error=0.013328  I(Phi_I;Phi_R)=1.107044  A=-0.2600  rho=-0.2586
+
+======================================================================
+BEST: Config 5
+{'n_layers': 6, 'hidden_dim': 32, 'num_epochs': 2000, 'lr': 0.002, 'lambda_white': 1.0, 'lambda_hsic': 5.0, 'gamma': 1.0}

@@ -1,0 +1,9 @@
+aIND Metrics  (Joint Coupling Flow)
+n_layers=3 | hidden_dim=32 | epochs=1000
+A = -0.000639  |  I(Phi;Psi) ~= 0.000000 nats
+============================================================
+I(Phi_I ; Phi_R)                   : 0.971991
+Residual energy                    : 0.837760
+MI(Phi_I, Psi+)                    : 0.807114
+MI(Phi_R, Psi+)                    : 1.527464
+GT error ||Phi_I-Phi_I_true||      : 0.816863
