@@ -1,9 +1,9 @@
-aIND Metrics  (JCF2: bivariate NLL + HSIC)
-n_layers=6 | hidden_dim=32 | epochs=2000
-rho=+0.854061  A=+0.958048  I~=1.249644 nats
+aIND Metrics  (Triangular Flow: joint normal + leak-free)
+n_terms=16 | hidden_dim=32 | epochs=2000
+rho=-0.197855  A=+0.000042  I~=0.000000 nats
 ============================================================
-I(Phi_I ; Phi_R)                   : 1.057469
-Residual energy                    : 0.001902
-MI(Phi_I, Psi+)                    : 2.056674
-MI(Phi_R, Psi+)                    : 0.846615
-GT error ||Phi_I-Phi_I_true||      : 0.014258
+I(Phi_I ; Phi_R)                   : 1.278716
+Residual energy                    : 0.990104
+MI(Phi_I, Psi+)                    : 7.668318
+MI(Phi_R, Psi+)                    : 2.076325
+GT error                           : 0.980099

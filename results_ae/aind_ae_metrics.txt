@@ -1,0 +1,8 @@
+aIND Metrics  (Convolutional Autoencoder)
+z_i=16  z_r=32  epochs=300
+============================================================
+I(Phi_I ; Phi_R)                   : 0.383362
+Residual energy                    : 0.010698
+MI(Phi_I, Psi+)                    : 4.061303
+MI(Phi_R, Psi+)                    : 0.210541
+GT error                           : 0.000723
